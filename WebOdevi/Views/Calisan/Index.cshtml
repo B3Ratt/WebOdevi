@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebOdevi.Models.Calisan>
+
+<div class="container">
+    <h2>Çalışanlar</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ad Soyad</th>
+                <th>Uzmanlık</th>
+                <th>Durum</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var calisan in Model)
+            {
+                <tr>
+                    <td>@calisan.AdSoyad</td>
+                    <td>@calisan.Uzmanlik</td>
+                    <td>@(calisan.Musaitlik ? "Müsait" : "Müsait Değil")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

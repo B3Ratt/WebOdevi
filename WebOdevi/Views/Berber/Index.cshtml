@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebOdevi.Models.Berber>
+
+<div class="container">
+    <h2>Berberler</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Berber Adı</th>
+                <th>Adres</th>
+                <th>Çalışma Saatleri</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var berber in Model)
+            {
+                <tr>
+                    <td>@berber.Ad</td>
+                    <td>@berber.Adres</td>
+                    <td>@berber.CalismaSaatleri</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

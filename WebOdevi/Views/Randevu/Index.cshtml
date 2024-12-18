@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WebOdevi.Models.Randevu>
+
+<div class="container">
+    <h2>Randevular</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>İşlem</th>
+                <th>Ücret</th>
+                <th>Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var randevu in Model)
+            {
+                <tr>
+                    <td>@randevu.Islem</td>
+                    <td>@randevu.Ucret</td>
+                    <td>@randevu.Tarih</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
