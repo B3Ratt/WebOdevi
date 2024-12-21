@@ -10,9 +10,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Identity servisini ekleyin
 builder.Services.AddIdentity<Kullanici, IdentityRole>(options =>
-    options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+{
+    options.SignIn.RequireConfirmedAccount = false; // E-posta doðrulama zorunluluðunu devre dýþý býrakýr
+}).AddEntityFrameworkStores<ApplicationDbContext>()
+  .AddDefaultTokenProviders();
 
 // Razor Pages ve MVC servislerini ekleyin
 builder.Services.AddRazorPages();
@@ -21,7 +22,7 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Razor Pages ve MVC rotalarýný haritalayýn
-app.MapRazorPages(); // Razor Pages için
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
