@@ -8,11 +8,13 @@ namespace WebOdevi.Controllers
     {
         private readonly UserManager<Kullanici> _userManager;
         private readonly SignInManager<Kullanici> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public KullaniciController(UserManager<Kullanici> userManager, SignInManager<Kullanici> signInManager)
+        public KullaniciController(UserManager<Kullanici> userManager, SignInManager<Kullanici> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         // Kullanıcı kaydı (GET)
@@ -33,9 +35,32 @@ namespace WebOdevi.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Admin rolü eklemek için kontrol ekliyoruz
+                    if (model.Email == "b221210044@sakarya.edu.tr") // Admin e-posta kontrolü
+                    {
+                        // Admin rolü var mı diye kontrol et
+                        if (!await _roleManager.RoleExistsAsync("Admin"))
+                        {
+                            await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                        }
+
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else
+                    {
+                        // Diğer kullanıcılar müşteri olarak atanır
+                        if (!await _roleManager.RoleExistsAsync("Müşteri"))
+                        {
+                            await _roleManager.CreateAsync(new IdentityRole("Müşteri"));
+                        }
+
+                        await _userManager.AddToRoleAsync(user, "Müşteri");
+                    }
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
