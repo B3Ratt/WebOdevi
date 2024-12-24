@@ -1,24 +1,44 @@
-﻿@model IEnumerable<WebOdevi.Models.Calisan>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Kullanici> UserManager
 
-<div class="container">
-    <h2>Çalışanlar</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Ad Soyad</th>
-                <th>Uzmanlık</th>
-                <th>Durum</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var calisan in Model)
+<h2>Çalışanlar</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Yeni Çalışan Ekle</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Pozisyon</th>
+            @if (User.IsInRole("Admin"))
             {
-                <tr>
-                    <td>@calisan.AdSoyad</td>
-                    <td>@calisan.Uzmanlik</td>
-                    <td>@(calisan.Musaitlik ? "Müsait" : "Müsait Değil")</td>
-                </tr>
+                <th>İşlemler</th>
             }
-        </tbody>
-    </table>
-</div>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var calisan in Model)
+        {
+            <tr>
+                <td>@calisan.Id</td>
+                <td>@calisan.Ad</td>
+                <td>@calisan.Soyad</td>
+                <td>@calisan.Pozisyon</td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@calisan.Id">Güncelle</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@calisan.Id">Sil</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

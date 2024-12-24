@@ -1,0 +1,18 @@
+﻿@model WebOdevi.Models.Calisan
+
+@{
+    ViewData["Title"] = "Çalışan Sil";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Çalışanı silmek istediğinize emin misiniz?</h3>
+
+<div>
+    <h4>@Model.Ad @Model.Soyad</h4>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Evet, Sil</button>
+        <a href="@Url.Action("Index", "Calisan")" class="btn btn-secondary">Hayır, İptal Et</a>
+    </form>
+</div>

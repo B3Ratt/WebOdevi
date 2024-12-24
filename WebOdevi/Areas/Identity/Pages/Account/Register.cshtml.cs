@@ -86,16 +86,7 @@ namespace WebOdevi.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.AdSoyad = Input.AdSoyad; // Yeni alanı kaydediyoruz
 
-                // E-posta ve şifre kontrolü: Admin kullanıcı belirleme
-                if (Input.Email == "b221210044@sakarya.edu.tr" && Input.Password == "sau)")
-                {
-                    user.Rol = "Admin";  // Admin rolü atanıyor
-                }
-                else
-                {
-                    user.Rol = "Müşteri";  // Diğer tüm kullanıcılara Müşteri rolü atanıyor
-                }
-
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

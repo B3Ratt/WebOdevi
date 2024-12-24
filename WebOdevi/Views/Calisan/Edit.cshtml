@@ -1,0 +1,33 @@
+﻿@model WebOdevi.Models.Calisan
+
+@{
+    ViewData["Title"] = "Çalışan Düzenle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Ad" class="control-label"></label>
+        <input asp-for="Ad" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Soyad" class="control-label"></label>
+        <input asp-for="Soyad" class="form-control" />
+        <span asp-validation-for="Soyad" class="text-danger"></span>
+    </div>
+
+    <!-- Diğer alanları da ekleyebilirsiniz -->
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>
+
+<a href="@Url.Action("Index", "Calisan")" class="btn btn-secondary">Geri</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

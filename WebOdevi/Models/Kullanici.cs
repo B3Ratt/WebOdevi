@@ -8,7 +8,6 @@
 
         [Required]
         public string AdSoyad { get; set; } // Kullanıcının adı ve soyadı
-        public string Rol { get; set; } // Kullanıcının rolü (Admin veya Müşteri)
     }
 
 }
