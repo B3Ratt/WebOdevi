@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WebOdevi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +28,14 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// RoleManager ve UserManager servislerini almak için scope oluþturun
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await EnsureRolesAsync(roleManager);
+}
+
 // HTTP Request Pipeline
 if (!app.Environment.IsDevelopment())
 {
@@ -49,3 +57,18 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+async Task EnsureRolesAsync(RoleManager<IdentityRole> roleManager)
+{
+    // Define the roles
+    var roles = new[] { "Admin", "Müþteri" };
+
+    // Create roles if they do not exist
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}

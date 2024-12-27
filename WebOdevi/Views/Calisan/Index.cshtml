@@ -1,43 +1,53 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<Kullanici> UserManager
+﻿@model IEnumerable<WebOdevi.Models.Calisan>
 
-<h2>Çalışanlar</h2>
-
-@if (User.IsInRole("Admin"))
-{
-    <p>
-        <a class="btn btn-primary" asp-action="Create">Yeni Çalışan Ekle</a>
-    </p>
+@{
+    ViewData["Title"] = "Çalışan Listesi";
 }
 
+<h1>Çalışan Listesi</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Çalışan Ekle</a>
+</p>
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Ad</th>
-            <th>Soyad</th>
-            <th>Pozisyon</th>
-            @if (User.IsInRole("Admin"))
-            {
-                <th>İşlemler</th>
-            }
+            <th>
+                @Html.DisplayNameFor(model => model.Ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Soyad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uzmanlik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Musaitlik)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var calisan in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@calisan.Id</td>
-                <td>@calisan.Ad</td>
-                <td>@calisan.Soyad</td>
-                <td>@calisan.Pozisyon</td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@calisan.Id">Güncelle</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@calisan.Id">Sil</a>
-                    </td>
-                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Soyad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Uzmanlik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Musaitlik)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
             </tr>
         }
     </tbody>

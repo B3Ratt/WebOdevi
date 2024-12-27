@@ -12,8 +12,8 @@ using WebOdevi.Models;
 namespace WebOdevi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241225202430_rol")]
-    partial class rol
+    [Migration("20241227212421_a")]
+    partial class a
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
