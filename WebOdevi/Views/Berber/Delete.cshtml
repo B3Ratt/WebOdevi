@@ -1,0 +1,15 @@
+﻿@model WebOdevi.Models.Berber
+
+<h1>Berber Sil</h1>
+<div>
+    <h3>Bu berberi silmek istediğinizden emin misiniz?</h3>
+    <div><strong>Ad:</strong> @Model.Ad</div>
+    <div><strong>Adres:</strong> @Model.Adres</div>
+    <div><strong>Çalışma Saatleri:</strong> @Model.CalismaSaatleri</div>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

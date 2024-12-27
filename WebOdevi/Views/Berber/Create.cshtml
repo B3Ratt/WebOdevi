@@ -1,0 +1,29 @@
+﻿@model WebOdevi.Models.Berber
+
+@{
+    ViewData["Title"] = "Yeni Berber Ekle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h1>Yeni Berber Ekle</h1>
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Ad"></label>
+        <input asp-for="Ad" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Adres"></label>
+        <input asp-for="Adres" class="form-control" />
+        <span asp-validation-for="Adres" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CalismaSaatleri"></label>
+        <input asp-for="CalismaSaatleri" class="form-control" />
+        <span asp-validation-for="CalismaSaatleri" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Ekle</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
+
