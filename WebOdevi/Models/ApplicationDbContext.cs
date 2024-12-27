@@ -7,8 +7,11 @@
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
         public DbSet<Berber> Berberler { get; set; }
-        public DbSet<Calisan> Calisanlar { get; set; }
         public DbSet<Randevu> Randevular { get; set; }
     }
 

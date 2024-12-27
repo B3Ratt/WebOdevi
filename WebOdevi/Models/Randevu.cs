@@ -6,8 +6,8 @@
         public DateTime Tarih { get; set; } // Randevu tarihi
         public string Islem { get; set; } // Yapılacak işlem (saç kesimi, saç boyama vb.)
         public decimal Ucret { get; set; } // İşlem ücreti
-        public int CalisanId { get; set; } // Hangi çalışanla yapıldığı
-        public Calisan Calisan { get; set; } // Çalışan bilgisi
+        public int BerberId { get; set; } // Hangi çalışanla yapıldığı
+        public Berber berber{ get; set; } // Çalışan bilgisi
     }
 
 }

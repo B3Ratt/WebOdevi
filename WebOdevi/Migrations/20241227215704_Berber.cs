@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebOdevi.Migrations
 {
     /// <inheritdoc />
-    public partial class a : Migration
+    public partial class Berber : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,8 +58,9 @@ namespace WebOdevi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Adres = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CalismaSaatleri = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Soyad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Uzmanlik = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Musaitlik = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -173,29 +174,6 @@ namespace WebOdevi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Calisanlar",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Soyad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Uzmanlik = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Musaitlik = table.Column<bool>(type: "bit", nullable: false),
-                    BerberId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Calisanlar", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Calisanlar_Berberler_BerberId",
-                        column: x => x.BerberId,
-                        principalTable: "Berberler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Randevular",
                 columns: table => new
                 {
@@ -204,15 +182,15 @@ namespace WebOdevi.Migrations
                     Tarih = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Islem = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ucret = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CalisanId = table.Column<int>(type: "int", nullable: false)
+                    BerberId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Randevular", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Randevular_Calisanlar_CalisanId",
-                        column: x => x.CalisanId,
-                        principalTable: "Calisanlar",
+                        name: "FK_Randevular_Berberler_BerberId",
+                        column: x => x.BerberId,
+                        principalTable: "Berberler",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -257,14 +235,9 @@ namespace WebOdevi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Calisanlar_BerberId",
-                table: "Calisanlar",
-                column: "BerberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Randevular_CalisanId",
+                name: "IX_Randevular_BerberId",
                 table: "Randevular",
-                column: "CalisanId");
+                column: "BerberId");
         }
 
         /// <inheritdoc />
@@ -293,9 +266,6 @@ namespace WebOdevi.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Calisanlar");
 
             migrationBuilder.DropTable(
                 name: "Berberler");

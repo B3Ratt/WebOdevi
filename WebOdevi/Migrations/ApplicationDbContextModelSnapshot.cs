@@ -167,34 +167,6 @@ namespace WebOdevi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Adres")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CalismaSaatleri")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Berberler");
-                });
-
-            modelBuilder.Entity("WebOdevi.Models.Calisan", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Ad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BerberId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Musaitlik")
                         .HasColumnType("bit");
 
@@ -208,9 +180,7 @@ namespace WebOdevi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BerberId");
-
-                    b.ToTable("Calisanlar");
+                    b.ToTable("Berberler");
                 });
 
             modelBuilder.Entity("WebOdevi.Models.Kullanici", b =>
@@ -290,7 +260,7 @@ namespace WebOdevi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CalisanId")
+                    b.Property<int>("BerberId")
                         .HasColumnType("int");
 
                     b.Property<string>("Islem")
@@ -305,7 +275,7 @@ namespace WebOdevi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CalisanId");
+                    b.HasIndex("BerberId");
 
                     b.ToTable("Randevular");
                 });
@@ -361,31 +331,15 @@ namespace WebOdevi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebOdevi.Models.Calisan", b =>
+            modelBuilder.Entity("WebOdevi.Models.Randevu", b =>
                 {
-                    b.HasOne("WebOdevi.Models.Berber", "Berber")
-                        .WithMany("Calisanlar")
+                    b.HasOne("WebOdevi.Models.Berber", "berber")
+                        .WithMany()
                         .HasForeignKey("BerberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Berber");
-                });
-
-            modelBuilder.Entity("WebOdevi.Models.Randevu", b =>
-                {
-                    b.HasOne("WebOdevi.Models.Calisan", "Calisan")
-                        .WithMany()
-                        .HasForeignKey("CalisanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Calisan");
-                });
-
-            modelBuilder.Entity("WebOdevi.Models.Berber", b =>
-                {
-                    b.Navigation("Calisanlar");
+                    b.Navigation("berber");
                 });
 #pragma warning restore 612, 618
         }

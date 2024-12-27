@@ -3,10 +3,10 @@
     public class Berber
     {
         public int Id { get; set; }
-        public string Ad { get; set; } // Berberin adı
-        public string Adres { get; set; } // Berberin adresi
-        public string CalismaSaatleri { get; set; } // Berberin çalışma saatleri
-        public List<Calisan> Calisanlar { get; set; } = new List<Calisan>(); // Berberin çalışanları
+        public string Ad { get; set; } // Çalışanın adı ve soyadı
+        public string Soyad { get; set; } // Çalışanın adı ve soyadı
+        public string Uzmanlik { get; set; } // Çalışanın uzmanlık alanları (saç kesimi, saç boyama, vb.)
+        public bool Musaitlik { get; set; } // Çalışanın müsaitlik durumu
     }
 
 }

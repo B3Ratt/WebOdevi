@@ -6,9 +6,9 @@
     <thead>
         <tr>
             <th>Ad</th>
-            <th>Adres</th>
-            <th>Çalışma Saatleri</th>
-            <th>İşlemler</th>
+            <th>Soyad</th>
+            <th>Uzmanlik</th>
+            <th>Musaitlik</th>
         </tr>
     </thead>
     <tbody>
@@ -16,8 +16,9 @@
         {
             <tr>
                 <td>@berber.Ad</td>
-                <td>@berber.Adres</td>
-                <td>@berber.CalismaSaatleri</td>
+                <td>@berber.Soyad</td>
+                <td>@berber.Uzmanlik</td>
+                <td>@berber.Musaitlik</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@berber.Id" class="btn btn-info">Detaylar</a>
                     @if (User.IsInRole("Admin"))
