@@ -10,32 +10,32 @@
 <hr />
 <dl class="row">
     <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Ad)
+        @Html.DisplayNameFor(model => model.Ad)  <!-- Berberin Adını gösterir -->
     </dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Ad)
+        @Html.DisplayFor(model => model.Ad)  <!-- Berberin Adını burada görüntüler -->
     </dd>
     <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Soyad)
+        @Html.DisplayNameFor(model => model.Soyad)  <!-- Berberin Soyadını gösterir -->
     </dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Soyad)
+        @Html.DisplayFor(model => model.Soyad)  <!-- Berberin Soyadını burada görüntüler -->
     </dd>
     <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Uzmanlik)
+        @Html.DisplayNameFor(model => model.Uzmanlik)  <!-- Berberin Uzmanlık bilgisini gösterir -->
     </dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Uzmanlik)
+        @Html.DisplayFor(model => model.Uzmanlik)  <!-- Berberin Uzmanlık bilgisini burada görüntüler -->
     </dd>
     <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Musaitlik)
+        @Html.DisplayNameFor(model => model.Musaitlik)  <!-- Berberin Müsaitlik bilgisini gösterir -->
     </dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Musaitlik)
+        @Html.DisplayFor(model => model.Musaitlik)  <!-- Berberin Müsaitlik bilgisini burada görüntüler -->
     </dd>
 </dl>
 
-<form asp-action="DeleteConfirmed">
+<form asp-action="DeleteConfirmed" method="post">
     <input type="hidden" asp-for="Id" />
     <div class="form-group">
         <input type="submit" value="Sil" class="btn btn-danger" /> |

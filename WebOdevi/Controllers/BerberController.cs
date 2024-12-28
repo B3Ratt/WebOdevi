@@ -96,24 +96,17 @@ namespace WebOdevi.Controllers
             return View(berber);
         }
 
-        // Berber silme işlemi (Sadece Admin)
-        [Authorize(Roles = "Admin")]
-        public IActionResult Delete(int? id)
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
             var berber = _context.Berberler.Find(id);
-
             if (berber == null)
             {
                 return NotFound();
             }
-
             return View(berber);
         }
+
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -128,5 +121,6 @@ namespace WebOdevi.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

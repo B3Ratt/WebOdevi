@@ -1,32 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using WebOdevi.Models;
 
 namespace WebOdevi.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
+    public class HomeController : Controller
+    {
+        public IActionResult Index()
+        {
+            // Berberin adı ve hoş geldiniz mesajını ViewData ile gönderiyoruz
+            ViewData["BerberAd"] = "X-Sir";  // Berberin adı
+            ViewData["WelcomeMessage"] = "Hoşgeldiniz!";  // Hoşgeldiniz mesajı
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+            // İlgili görselin yolu
+            ViewData["ImageUrl"] = "/images/berber.jpg";
 
-		public IActionResult Index()
-		{
-			return View();
-		}
-
-		public IActionResult Privacy()
-		{
-			return View();
-		}
-
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+            return View();
+        }
+    }
 }
