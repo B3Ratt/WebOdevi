@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Saç Tavsiyesi";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="image">Bir Görsel Seçin</label>
+        <input type="file" class="form-control" id="image" name="image" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Saç Tavsiyesi Al</button>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger">
+        @ViewData["ErrorMessage"]
+    </div>
+}

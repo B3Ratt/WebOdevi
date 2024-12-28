@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Sonuç";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null && Model.Contains("http"))
+{
+    <div>
+        <p>Saç stiliniz başarıyla değiştirildi!</p>
+        <img src="@Model" alt="Yeni Saç Stili" class="img-fluid" />
+    </div>
+}
+else
+{
+    <div>
+        <p>Bir hata oluştu. Lütfen tekrar deneyin.</p>
+    </div>
+}
+
+<a href="@Url.Action("ChangeHairstyle", "Hairstyle")" class="btn btn-secondary">Başka bir Görsel Yükle</a>

@@ -1,0 +1,45 @@
+﻿@model WebOdevi.Models.Randevu
+
+@{
+    ViewData["Title"] = "Randevu Oluştur";
+}
+
+<h1>Randevu Oluştur</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="KullaniciId" class="control-label">Kullanıcı</label>
+        <select asp-for="KullaniciId" class="form-control">
+            @foreach (var kullanici in ViewBag.Kullanicilar)
+            {
+                <option value="@kullanici.Id">@kullanici.AdSoyad</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="BerberId" class="control-label">Berber</label>
+        <select asp-for="BerberId" class="form-control">
+            @foreach (var berber in ViewBag.Berberler)
+            {
+                <option value="@berber.Id">@berber.Ad</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tarih" class="control-label">Tarih</label>
+        <input asp-for="Tarih" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BaslangicSaati" class="control-label">Başlangıç Saati</label>
+        <input asp-for="BaslangicSaati" class="form-control" type="time" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Islem" class="control-label">İşlem</label>
+        <input asp-for="Islem" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Ucret" class="control-label">Ücret</label>
+        <input asp-for="Ucret" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Randevu Al</button>
+</form>

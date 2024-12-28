@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebOdevi.Migrations
 {
     /// <inheritdoc />
-    public partial class Berber : Migration
+    public partial class a : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -182,11 +182,22 @@ namespace WebOdevi.Migrations
                     Tarih = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Islem = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ucret = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BerberId = table.Column<int>(type: "int", nullable: false)
+                    BerberId = table.Column<int>(type: "int", nullable: false),
+                    KullaniciId = table.Column<int>(type: "int", nullable: false),
+                    KullaniciId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BaslangicSaati = table.Column<TimeSpan>(type: "time", nullable: false),
+                    BitisSaati = table.Column<TimeSpan>(type: "time", nullable: false),
+                    Durum = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Randevular", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Randevular_AspNetUsers_KullaniciId1",
+                        column: x => x.KullaniciId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Randevular_Berberler_BerberId",
                         column: x => x.BerberId,
@@ -238,6 +249,11 @@ namespace WebOdevi.Migrations
                 name: "IX_Randevular_BerberId",
                 table: "Randevular",
                 column: "BerberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Randevular_KullaniciId1",
+                table: "Randevular",
+                column: "KullaniciId1");
         }
 
         /// <inheritdoc />

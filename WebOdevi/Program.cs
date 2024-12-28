@@ -22,6 +22,10 @@ builder.Services.AddIdentity<Kullanici, IdentityRole>(options =>
 }).AddEntityFrameworkStores<ApplicationDbContext>()
   .AddDefaultTokenProviders();
 
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<HairstyleApiService>();
+
+
 // Razor Pages ve MVC servislerini ekleyin
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();

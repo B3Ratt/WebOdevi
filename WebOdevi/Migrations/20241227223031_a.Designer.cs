@@ -12,8 +12,8 @@ using WebOdevi.Models;
 namespace WebOdevi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241227215704_Berber")]
-    partial class Berber
+    [Migration("20241227223031_a")]
+    partial class a
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -263,12 +263,29 @@ namespace WebOdevi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<TimeSpan>("BaslangicSaati")
+                        .HasColumnType("time");
+
                     b.Property<int>("BerberId")
                         .HasColumnType("int");
+
+                    b.Property<TimeSpan>("BitisSaati")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Durum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Islem")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("KullaniciId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KullaniciId1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Tarih")
                         .HasColumnType("datetime2");
@@ -279,6 +296,8 @@ namespace WebOdevi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BerberId");
+
+                    b.HasIndex("KullaniciId1");
 
                     b.ToTable("Randevular");
                 });
@@ -336,13 +355,21 @@ namespace WebOdevi.Migrations
 
             modelBuilder.Entity("WebOdevi.Models.Randevu", b =>
                 {
-                    b.HasOne("WebOdevi.Models.Berber", "berber")
+                    b.HasOne("WebOdevi.Models.Berber", "Berber")
                         .WithMany()
                         .HasForeignKey("BerberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("berber");
+                    b.HasOne("WebOdevi.Models.Kullanici", "Kullanici")
+                        .WithMany()
+                        .HasForeignKey("KullaniciId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Berber");
+
+                    b.Navigation("Kullanici");
                 });
 #pragma warning restore 612, 618
         }

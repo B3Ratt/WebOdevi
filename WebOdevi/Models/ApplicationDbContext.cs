@@ -11,8 +11,10 @@
         {
             base.OnModelCreating(builder);
         }
+
+        // Add DbSet properties for your models
         public DbSet<Berber> Berberler { get; set; }
         public DbSet<Randevu> Randevular { get; set; }
+        public DbSet<Kullanici> Kullanicilar { get; set; }  
     }
-
 }
